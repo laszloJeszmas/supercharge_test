@@ -73,4 +73,12 @@ public class BankAccount implements PersonalBanking{
     private void printHistory(Stream<Transaction> transactionStream) {
         transactionStream.forEach(System.out::println);
     }
+
+    public BigDecimal getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public List<Transaction> getTransactionHistory() {
+        return transactionHistory;
+    }
 }
