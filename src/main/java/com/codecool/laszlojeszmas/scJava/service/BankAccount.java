@@ -2,6 +2,8 @@ package com.codecool.laszlojeszmas.scJava.service;
 
 import com.codecool.laszlojeszmas.scJava.model.Transaction;
 import com.codecool.laszlojeszmas.scJava.model.TransactionType;
+import com.codecool.laszlojeszmas.scJava.service.interfaces.PersonalBanking;
+import com.codecool.laszlojeszmas.scJava.service.interfaces.PrintAccountHistory;
 
 import java.math.BigDecimal;
 import java.security.InvalidParameterException;
@@ -10,7 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class BankAccount implements PersonalBanking{
+public class BankAccount implements PersonalBanking, PrintAccountHistory {
+
     private BigDecimal currentBalance = new BigDecimal(0);
     private List<Transaction> transactionHistory = new ArrayList<>();
 
@@ -43,6 +46,13 @@ public class BankAccount implements PersonalBanking{
         printHistory(transactionHistory.stream().
                 filter(transaction -> transaction.getTransactionType().equals(transactionType)));
     }
+
+    @Override
+    public void printHistory(Date date) {
+        printHistory(transactionHistory.stream().
+                filter(transaction -> transaction.getDate().equals(date)));
+    }
+
 
     @Override
     public void printHistoryBeforeDate(Date date) {

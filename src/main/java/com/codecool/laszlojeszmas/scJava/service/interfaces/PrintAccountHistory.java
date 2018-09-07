@@ -1,16 +1,13 @@
-package com.codecool.laszlojeszmas.scJava.service;
+package com.codecool.laszlojeszmas.scJava.service.interfaces;
 
 import com.codecool.laszlojeszmas.scJava.model.TransactionType;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public interface PersonalBanking {
-    void deposit(BigDecimal amount);
-    void withdraw(BigDecimal amount);
-    void transfer(BankAccount to, BigDecimal amount);
+public interface PrintAccountHistory {
     void printHistory();
     void printHistory(TransactionType transactionType);
+    void printHistory(Date date);
     void printHistoryBeforeDate(Date date);
     void printHistoryAfterDate(Date date);
     void printHistoryBeforeDate(Date date, TransactionType transactionType);
