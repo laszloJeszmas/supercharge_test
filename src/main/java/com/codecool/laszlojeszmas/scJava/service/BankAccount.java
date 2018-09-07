@@ -1,4 +1,7 @@
-package com.codecool.laszlojeszmas.scJava;
+package com.codecool.laszlojeszmas.scJava.service;
+
+import com.codecool.laszlojeszmas.scJava.model.Transaction;
+import com.codecool.laszlojeszmas.scJava.model.TransactionType;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class User implements PersonalBanking{
+public class BankAccount implements PersonalBanking{
     private BigDecimal currentBalance = new BigDecimal(0);
     private List<Transaction> transactionHistory = new ArrayList<>();
 
@@ -23,7 +26,7 @@ public class User implements PersonalBanking{
     }
 
     @Override
-    public void transfer(User to, BigDecimal amount) {
+    public void transfer(BankAccount to, BigDecimal amount) {
         withdraw(amount);
         to.deposit(amount);
     }
@@ -67,9 +70,5 @@ public class User implements PersonalBanking{
 
     private void printHistory(Stream<Transaction> transactionStream) {
         transactionStream.forEach(System.out::println);
-    }
-
-    public BigDecimal getCurrentBalacne(){
-        return currentBalance;
     }
 }

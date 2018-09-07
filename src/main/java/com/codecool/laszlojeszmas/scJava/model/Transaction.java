@@ -1,4 +1,4 @@
-package com.codecool.laszlojeszmas.scJava;
+package com.codecool.laszlojeszmas.scJava.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
