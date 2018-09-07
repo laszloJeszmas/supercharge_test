@@ -55,4 +55,31 @@ class BankAccountTest {
         bankAccount.withdraw(toWithdraw);
         assertEquals(bankAccount.getCurrentBalance(), new BigDecimal(25));
     }
+
+    @Test
+    void testIsTransferWithdrawAmount(){
+        BankAccount to = new BankAccount();
+        BigDecimal amount = new BigDecimal(50);
+        BigDecimal toWithdraw = new BigDecimal(25);
+        bankAccount.deposit(amount);
+        bankAccount.transfer(to, toWithdraw);
+        assertEquals(bankAccount.getCurrentBalance(), new BigDecimal(25));
+    }
+
+    @Test
+    void testIsTransferDepositAmount(){
+        BankAccount to = new BankAccount();
+        BigDecimal amount = new BigDecimal(50);
+        BigDecimal toWithdraw = new BigDecimal(25);
+        bankAccount.deposit(amount);
+        bankAccount.transfer(to, toWithdraw);
+        assertEquals(to.getCurrentBalance(), new BigDecimal(25));
+    }
+
+    @Test
+    void testIsTransferThrowInvalidParameterException() {
+        BankAccount to = new BankAccount();
+        assertThrows(InvalidParameterException.class, ()->
+                bankAccount.transfer(to, new BigDecimal(1)));
+    }
 }
