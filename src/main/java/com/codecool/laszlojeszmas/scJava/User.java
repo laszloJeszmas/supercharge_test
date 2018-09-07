@@ -6,17 +6,17 @@ import java.util.Date;
 import java.util.List;
 
 public class User implements PersonalBanking{
-    private BigDecimal currentBalance;
+    private BigDecimal currentBalance = new BigDecimal(0);
     private List<Transaction> transactionHistory = new ArrayList<>();
 
     @Override
-    public void deposit() {
-
+    public void deposit(BigDecimal amount) {
+        currentBalance = currentBalance.add(amount);
     }
 
     @Override
-    public void withdraw() {
-
+    public void withdraw(BigDecimal amount) {
+        currentBalance = currentBalance.subtract(amount.abs());
     }
 
     @Override
@@ -37,5 +37,9 @@ public class User implements PersonalBanking{
     @Override
     public void printHistory(Date date) {
 
+    }
+
+    public BigDecimal getCurrentBalacne(){
+        return currentBalance;
     }
 }
