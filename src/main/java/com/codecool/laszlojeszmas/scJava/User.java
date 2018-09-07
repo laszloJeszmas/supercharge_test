@@ -12,22 +12,24 @@ public class User implements PersonalBanking{
     @Override
     public void deposit(BigDecimal amount) {
         currentBalance = currentBalance.add(amount.abs());
+        transactionHistory.add(new Transaction(TransactionType.DEPOSIT, amount, currentBalance));
     }
 
     @Override
     public void withdraw(BigDecimal amount) {
         currentBalance = currentBalance.subtract(amount.abs());
+        transactionHistory.add(new Transaction(TransactionType.WITHDRAW, amount, currentBalance));
     }
 
     @Override
     public void transfer(User to, BigDecimal amount) {
-        currentBalance = currentBalance.subtract(amount.abs());
+        withdraw(amount);
         to.deposit(amount);
     }
 
     @Override
     public void printHistory() {
-
+        transactionHistory.forEach(System.out::println);
     }
 
     @Override

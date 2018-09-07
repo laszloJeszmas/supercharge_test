@@ -8,4 +8,19 @@ public class Transaction {
     private Date date;
     private BigDecimal amount;
     private BigDecimal balance;
+
+    public Transaction(TransactionType transactionType, BigDecimal amount, BigDecimal balance) {
+        this.transactionType = transactionType;
+        this.amount = amount;
+        this.balance = balance;
+        this.date = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction: " + date +
+                "| " + transactionType +
+                "| amount=" + amount +
+                "| balance=" + balance;
+    }
 }
