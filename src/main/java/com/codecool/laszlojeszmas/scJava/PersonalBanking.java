@@ -6,7 +6,7 @@ import java.util.Date;
 public interface PersonalBanking {
     void deposit(BigDecimal amount);
     void withdraw(BigDecimal amount);
-    void transfer(User user);
+    void transfer(User to, BigDecimal amount);
     void printHistory();
     void printHistory(TransactionType transactionType);
     void printHistory(Date date);

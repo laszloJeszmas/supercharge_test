@@ -11,7 +11,7 @@ public class User implements PersonalBanking{
 
     @Override
     public void deposit(BigDecimal amount) {
-        currentBalance = currentBalance.add(amount);
+        currentBalance = currentBalance.add(amount.abs());
     }
 
     @Override
@@ -20,8 +20,9 @@ public class User implements PersonalBanking{
     }
 
     @Override
-    public void transfer(User user) {
-
+    public void transfer(User to, BigDecimal amount) {
+        currentBalance = currentBalance.subtract(amount.abs());
+        to.deposit(amount);
     }
 
     @Override
