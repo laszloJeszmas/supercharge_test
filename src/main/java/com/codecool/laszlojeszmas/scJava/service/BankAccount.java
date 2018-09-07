@@ -4,6 +4,7 @@ import com.codecool.laszlojeszmas.scJava.model.Transaction;
 import com.codecool.laszlojeszmas.scJava.model.TransactionType;
 
 import java.math.BigDecimal;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,7 @@ public class BankAccount implements PersonalBanking{
 
     @Override
     public void withdraw(BigDecimal amount) {
+        if (amount.compareTo(currentBalance) > 0) throw new InvalidParameterException();
         currentBalance = currentBalance.subtract(amount.abs());
         transactionHistory.add(new Transaction(TransactionType.WITHDRAW, amount, currentBalance));
     }
