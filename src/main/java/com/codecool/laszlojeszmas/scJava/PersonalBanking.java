@@ -9,5 +9,8 @@ public interface PersonalBanking {
     void transfer(User to, BigDecimal amount);
     void printHistory();
     void printHistory(TransactionType transactionType);
-    void printHistory(Date date);
+    void printHistoryBeforeDate(Date date);
+    void printHistoryAfterDate(Date date);
+    void printHistoryBeforeDate(Date date, TransactionType transactionType);
+    void printHistoryAfterDate(Date date, TransactionType transactionType);
 }

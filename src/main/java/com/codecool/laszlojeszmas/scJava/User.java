@@ -33,10 +33,6 @@ public class User implements PersonalBanking{
         printHistory(transactionHistory.stream());
     }
 
-    private void printHistory(Stream<Transaction> transactionStream) {
-        transactionStream.forEach(System.out::println);
-    }
-
     @Override
     public void printHistory(TransactionType transactionType) {
         printHistory(transactionHistory.stream().
@@ -44,8 +40,33 @@ public class User implements PersonalBanking{
     }
 
     @Override
-    public void printHistory(Date date) {
+    public void printHistoryBeforeDate(Date date) {
+        printHistory(transactionHistory.stream()
+                .filter(transaction -> !transaction.getDate().after(date)));
+    }
 
+    @Override
+    public void printHistoryAfterDate(Date date) {
+        printHistory(transactionHistory.stream()
+                .filter(transaction -> !transaction.getDate().before(date)));
+    }
+
+    @Override
+    public void printHistoryBeforeDate(Date date, TransactionType transactionType) {
+        printHistory(transactionHistory.stream()
+                .filter(transaction -> !transaction.getDate().after(date)
+                        && transaction.getTransactionType().equals(transactionType)));
+    }
+
+    @Override
+    public void printHistoryAfterDate(Date date, TransactionType transactionType) {
+        printHistory(transactionHistory.stream()
+                .filter(transaction -> !transaction.getDate().before(date)
+                        && transaction.getTransactionType().equals(transactionType)));
+    }
+
+    private void printHistory(Stream<Transaction> transactionStream) {
+        transactionStream.forEach(System.out::println);
     }
 
     public BigDecimal getCurrentBalacne(){
