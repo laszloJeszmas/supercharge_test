@@ -32,6 +32,13 @@ class BankAccountTest {
     }
 
     @Test
+    void testIsDepositChangeBalanceHistory(){
+        BigDecimal amount = new BigDecimal(50);
+        bankAccount.deposit(amount);
+        assertEquals(bankAccount.getTransactionHistory().size(), 1);
+    }
+
+    @Test
     void testIsWithdrawSubstractBalance(){
         BigDecimal amount = new BigDecimal(50);
         BigDecimal toWithdraw = new BigDecimal(25);
@@ -54,6 +61,15 @@ class BankAccountTest {
         bankAccount.deposit(amount);
         bankAccount.withdraw(toWithdraw);
         assertEquals(bankAccount.getCurrentBalance(), new BigDecimal(25));
+    }
+
+    @Test
+    void testIsWithdrawChangeBalanceHistory(){
+        BigDecimal amount = new BigDecimal(50);
+        BigDecimal toWithdraw = new BigDecimal(25);
+        bankAccount.deposit(amount);
+        bankAccount.withdraw(toWithdraw);
+        assertEquals(bankAccount.getTransactionHistory().size(), 2);
     }
 
     @Test
@@ -81,5 +97,25 @@ class BankAccountTest {
         BankAccount to = new BankAccount();
         assertThrows(InvalidParameterException.class, ()->
                 bankAccount.transfer(to, new BigDecimal(1)));
+    }
+
+    @Test
+    void testIsTransferChangeBalanceHistoryForFrom(){
+        BankAccount to = new BankAccount();
+        BigDecimal amount = new BigDecimal(50);
+        BigDecimal toWithdraw = new BigDecimal(25);
+        bankAccount.deposit(amount);
+        bankAccount.transfer(to, toWithdraw);
+        assertEquals(bankAccount.getTransactionHistory().size(), 2);
+    }
+
+    @Test
+    void testIsTransferChangeBalanceHistoryForTo(){
+        BankAccount to = new BankAccount();
+        BigDecimal amount = new BigDecimal(50);
+        BigDecimal toWithdraw = new BigDecimal(25);
+        bankAccount.deposit(amount);
+        bankAccount.transfer(to, toWithdraw);
+        assertEquals(to.getTransactionHistory().size(), 1);
     }
 }
