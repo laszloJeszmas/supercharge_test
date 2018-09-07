@@ -16,6 +16,22 @@ public class Transaction {
         this.date = new Date();
     }
 
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
     @Override
     public String toString() {
         return "Transaction: " + date +

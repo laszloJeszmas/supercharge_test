@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class User implements PersonalBanking{
     private BigDecimal currentBalance = new BigDecimal(0);
@@ -29,12 +30,17 @@ public class User implements PersonalBanking{
 
     @Override
     public void printHistory() {
-        transactionHistory.forEach(System.out::println);
+        printHistory(transactionHistory.stream());
+    }
+
+    private void printHistory(Stream<Transaction> transactionStream) {
+        transactionStream.forEach(System.out::println);
     }
 
     @Override
     public void printHistory(TransactionType transactionType) {
-
+        printHistory(transactionHistory.stream().
+                filter(transaction -> transaction.getTransactionType().equals(transactionType)));
     }
 
     @Override
